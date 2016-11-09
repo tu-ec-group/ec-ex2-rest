@@ -17,6 +17,12 @@
     "id": {
       "type": "string",
       "id": true
+    },
+    "name": {
+      "type": "string"
+    },
+    "date": {
+      "type": "date"
     }
   },
   "validations": [],

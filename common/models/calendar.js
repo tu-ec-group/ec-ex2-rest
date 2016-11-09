@@ -95,11 +95,13 @@ var moment = require('moment');
 module.exports = function(Calendar) {
     Calendar.timeToDate = function(eventName, cb) {
 
-        // TODO:
-        // implement a search ("findOne") operation where the name matches the "eventName"
-        // and the response should be human readable (for example with momemt and the plugin preciseDiff)
-        // keep in mind that the string could also not be found in the DB
-        cb(null, "NOT YET IMPLEMENTED");
+        Calendar.findOne({where: {name: eventName}}, (error, calendar) => {
+          if(calendar === null) {
+            cb({"message" : "event not found", status: 404}, '');
+          } else {
+            cb(null, moment.preciseDiff(calendar.date));
+          }
+        });
     };
 
     Calendar.setup = function() {
